@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -22,12 +23,14 @@ import { MatButtonModule } from '@angular/material/button';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    NgbModule,
   ],
   exports: [
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
