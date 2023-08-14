@@ -1,9 +1,17 @@
-<img class="logog-container" src="../assets/logo.png"  />
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
+<div class="sitebody">
+<div class="sidebar_left">
+  <img class="sidebar_left" src="../assets/logo.png"  />
 
-  </mat-drawer>
-  <img class="sidenav__logo" src="assets/heroicons_bars.svg" (click)="drawer.toggle()" />
+</div>
+<div class="footer">預算科目總表</div>
+<div class="content">
+  <mat-drawer-container class="example-container">
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+      <p>Auto-resizing sidenav</p>
+  
+    </mat-drawer>
+    <img class="sidenav__logo" src="assets/heroicons_bars.svg" (click)="drawer.toggle()" />
+  </mat-drawer-container>
+</div>
 
-</mat-drawer-container>
+  </div>

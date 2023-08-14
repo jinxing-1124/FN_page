@@ -1,21 +1,59 @@
 .example-container {
 
     border: 1px solid rgba(0, 0, 0, 0.5);
-    height: 700px;
+    height: 600px;
 
   }
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-
+.sidenav__logo {
+  margin-left: 0px;
   }
   
 .example-sidenav {
     padding: 20px;
+    width: 250px;    
     background-color: #F4FDED;
   }
 .logog-container {
 
     height: 150px;
-    width: 250px;
+    width: 250px;    
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+  }
+
+.top-container {
+
+    margin-left: 251px;
+    margin-top: 0px;
+
+    border: 1px solid rgba(0, 0, 0, 0.5);
+
+}
+
+.sitebody{
+  height:750px;
+  margin:0 auto;
+  font-size:13px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+
+  }
+
+.content{
+  background-color:#FFD4D4;
+  height:600px;
+  }
+.sidebar_left{
+  background-color:#FFECC9;
+  width:250px;
+  height:150px;
+  text-align:center;
+  line-height:150px;
+  float:left;
+  }
+.footer{
+  margin-left:120px;
+  height:150px;
+  background-color:#F2FFF2;
+  text-align:center;
+  line-height:150px;
   }
