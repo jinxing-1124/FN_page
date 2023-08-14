@@ -3,14 +3,25 @@
   <img class="sidebar_left" src="../assets/logo.png"  />
 
 </div>
-<div class="footer">預算科目總表</div>
+<div class="top-right">
+    預算科目總表
+  <div >
+  </div>
+  <div >
+    <mat-icon class="account_circle">account_circle</mat-icon>
+    username
+    <img class="logout-icon" src="assets/ic-sto-logout.svg" (click)="logout()">
+  </div>
+</div>
 <div class="content">
   <mat-drawer-container class="example-container">
     <mat-drawer #drawer class="example-sidenav" mode="side">
       <p>Auto-resizing sidenav</p>
-  
     </mat-drawer>
     <img class="sidenav__logo" src="assets/heroicons_bars.svg" (click)="drawer.toggle()" />
+    <ng-template #table>
+      
+    </ng-template>
   </mat-drawer-container>
 </div>
 

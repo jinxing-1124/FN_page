@@ -1,7 +1,7 @@
 .example-container {
 
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    height: 600px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 600px;
 
   }
 .sidenav__logo {
@@ -9,26 +9,26 @@
   }
   
 .example-sidenav {
-    padding: 20px;
-    width: 250px;    
-    background-color: #F4FDED;
+  padding: 20px;
+  width: 250px;    
+  background-color: #F4FDED;
   }
 .logog-container {
 
-    height: 150px;
-    width: 250px;    
-    border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 150px;
+  width: 250px;    
+  border: 1px solid rgba(0, 0, 0, 0.5);
 
   }
 
 .top-container {
 
-    margin-left: 251px;
-    margin-top: 0px;
+  margin-left: 251px;
+  margin-top: 0px;
 
-    border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
 
-}
+  }
 
 .sitebody{
   height:750px;
@@ -50,10 +50,30 @@
   line-height:150px;
   float:left;
   }
-.footer{
-  margin-left:120px;
+.top-right{
+  margin-left:250px;
   height:150px;
-  background-color:#F2FFF2;
-  text-align:center;
+  background-color:#95ed95;
+  text-align:left;
   line-height:150px;
+  border-radius: 25px 25px 25px 25px;
+  font-size:30px;
+  display: flex;
+  justify-content:space-between
   }
+
+.logout-icon{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-right:20px;
+  width:60px;
+  height:60px;
+  }
+
+.account_circle{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 60px;
+  margin-right:20px;
+  width:60px;
+  height:60px;
+  align-items: center;
+}
