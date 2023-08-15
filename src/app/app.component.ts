@@ -46,7 +46,7 @@ export class AppComponent {
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: PeriodicElement | null;
   logout(): void {}
-  dataSource1 = ELEMENT_DATA1;
+  dataDetail = ELEMENT_DATA1;
   columnsDetail = [
     '項目',
     '整年預計使用',
@@ -56,6 +56,9 @@ export class AppComponent {
     '累積使用率',
     '狀態',
   ];
+  currentDate = new Date();
+  currentMonth = this.currentDate.getMonth() + 1; // 月份从0开始，所以需要加1
+  
 }
 
 export interface PeriodicElement {

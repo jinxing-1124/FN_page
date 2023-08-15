@@ -75,7 +75,6 @@
   margin-right:20px;
   width:60px;
   height:60px;
-  align-items: center;
 }
 
 
@@ -126,4 +125,14 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description-attribution {
   opacity: 0.5;
+}
+
+.col{
+  background-color: #95ed95;
+  height: 50px;
+  margin-right:25px;
+  border-radius: 25px 25px 25px 25px;
+  font-size: 24px;
+  text-align:center;
+
 }
