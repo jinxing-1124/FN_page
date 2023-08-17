@@ -33,6 +33,10 @@ import { MatTableModule } from '@angular/material/table';
   ],
 })
 export class AppComponent {
+  items = [
+    { title: 'subject:1', description: 'project_id:1' },
+    { title: 'subject:2', description: 'project:2' },
+  ];
   dataSource = ELEMENT_DATA;
   columnsToDisplay = [
     '科目',
@@ -58,7 +62,12 @@ export class AppComponent {
   ];
   currentDate = new Date();
   currentMonth = this.currentDate.getMonth() + 1; // 月份从0开始，所以需要加1
-  
+  dataDetailDisplay :any;
+
+  TableDetailData (element: any) {
+    this.dataDetailDisplay = this.dataDetail;
+    this.dataDetailDisplay = this.dataDetailDisplay.filter((item: { 科目: any; }) => item.科目 === element.科目);
+  }
 }
 
 export interface PeriodicElement {

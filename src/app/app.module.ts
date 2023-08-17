@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { NumberAddCommasPipe } from './number_add_commas';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NumberAddCommasPipe } from './number_add_commas';
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    MatExpansionModule,
   ],
   exports: [
     MatSidenavModule,
