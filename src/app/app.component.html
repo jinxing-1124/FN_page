@@ -64,7 +64,7 @@
               mat-icon-button
               aria-label="expand row"
               (click)="
-                expandedElement = expandedElement === element ? null : element;
+                expandedElement = expandedElement === element ? null : element;TableDetailData(element);
                 $event.stopPropagation()
               "
             >
@@ -94,7 +94,7 @@
               <div class="example-element-description">
                 <table
                   mat-table
-                  [dataSource]="dataDetail"
+                  [dataSource]="dataDetailDisplay"
                   class="mat-elevation-z8"
                   multiTemplateDataRows
                 >
@@ -125,7 +125,7 @@
           class="example-element-row"
           [class.example-expanded-row]="expandedElement === element"
           (click)="
-            expandedElement = expandedElement === element ? null : element
+            expandedElement = expandedElement === element ? null : element; TableDetailData(element)
           "
         ></tr>
         <tr

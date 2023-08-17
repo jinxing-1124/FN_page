@@ -58,7 +58,12 @@ export class AppComponent {
   ];
   currentDate = new Date();
   currentMonth = this.currentDate.getMonth() + 1; // 月份从0开始，所以需要加1
-  
+  dataDetailDisplay :any;
+
+  TableDetailData (element: any) {
+    this.dataDetailDisplay = this.dataDetail;
+    this.dataDetailDisplay = this.dataDetailDisplay.filter((item: { 科目: any; }) => item.科目 === element.科目);
+  }
 }
 
 export interface PeriodicElement {
