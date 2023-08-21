@@ -11,11 +11,8 @@ import {
   trigger,
   state,
 } from '@angular/animations';
-import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { NgFor, NgIf } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
+import { HttpService } from './second_api';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -32,101 +29,232 @@ import { MatTableModule } from '@angular/material/table';
     ]),
   ],
 })
-export class AppComponent {
-  items = [
-    { title: 'subject:1', description: 'project_id:1' },
-    { title: 'subject:2', description: 'project:2' },
-  ];
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = [
-    '科目',
-    '整年預計使用',
-    '目前應發生',
-    '目前已發生',
-    '年度使用率',
-    '累積使用率',
-    '狀態',
-  ];
-  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
-  expandedElement!: PeriodicElement | null;
-  logout(): void {}
-  dataDetail = ELEMENT_DATA1;
-  columnsDetail = [
-    '項目',
-    '整年預計使用',
-    '目前應發生',
-    '目前已發生',
-    '年度使用率',
-    '累積使用率',
-    '狀態',
-  ];
-  currentDate = new Date();
-  currentMonth = this.currentDate.getMonth() + 1; // 月份从0开始，所以需要加1
-  dataDetailDisplay :any;
+export class AppComponent implements OnInit {
+  constructor(private httpService: HttpService) {}
 
-  TableDetailData (element: any) {
-    this.dataDetailDisplay = this.dataDetail;
-    this.dataDetailDisplay = this.dataDetailDisplay.filter((item: { 科目: any; }) => item.科目 === element.科目);
+  // dataSource = ELEMENT_DATA;
+  columnsToDisplay = ['amount_sum', 'item', 'division'];
+  columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
+  expandedElement!: GetInitResponseModel | null;
+  logout(): void {}
+  // dataDetail = ELEMENT_DATA;
+  expansionPanelData = tmpdata;
+  columnsDetail = [
+    '1月',
+    '2月',
+    '3月',
+    '4月',
+    '5月',
+    '6月',
+    '7月',
+    '8月',
+    '9月',
+    '10月',
+    '11月',
+    '12月',
+  ];
+  dataDetailDisplay: any;
+
+  // TableDetailData(element: any) {
+  //   this.dataDetailDisplay = this.dataDetail;
+  //   this.dataDetailDisplay = this.dataDetailDisplay.filter(
+  //     (item: { 科目: any }) => item.科目 === element.科目
+  //   );
+  // }
+  Test(data: any): void {
+    console.log(typeof data, data);
+  }
+  res_data: GetInitResponseModel = {
+    subjects: [],
+  }
+  getRepos():void {
+    this.httpService.getInitResponse().subscribe((response) => {
+      this.res_data = response.subjects;
+      // console.log(this.res_data)
+
+    });
+  }
+
+  TestData(): void {
+    
+  }
+
+  ngOnInit(): void {
+    this.httpService.getInitResponse().subscribe((response) => {
+      this.res_data = response.subjects;
+      for (const subject of this.res_data.subjects) {
+        let data = {
+          subject_name: subject.subject_name,
+          project_name: '',
+          tmp: [
+            {
+              amount: [[0]],
+              amount_sum: 0,
+              item: '',
+              division: '',
+            },
+          ],
+        };
+        let tmp2: any[] = [];
+        for (const summaryItem of subject.summary) {
+          const sum = summaryItem.amount.reduce(
+            (total, currentAmount) => total + currentAmount,
+            0
+          );
+          data.project_name = summaryItem.project_name;
+          const tmplist = {
+            amount: [summaryItem.amount],
+            amount_sum: sum,
+            item: summaryItem.item,
+            division: summaryItem.division,
+          };
+          tmp2.push(tmplist);
+        }
+        data.tmp = tmp2;
+        tmpdata.push(data);
+      }
+    });
+    // for (const subject of this.res_data.subjects) {
+    //   let data = {
+    //     subject_name: subject.subject_name,
+    //     project_name: '',
+    //     tmp: [
+    //       {
+    //         amount: [[0]],
+    //         amount_sum: 0,
+    //         item: '',
+    //         division: '',
+    //       },
+    //     ],
+    //   };
+    //   let tmp2: any[] = [];
+    //   for (const summaryItem of subject.summary) {
+    //     const sum = summaryItem.amount.reduce(
+    //       (total, currentAmount) => total + currentAmount,
+    //       0
+    //     );
+    //     data.project_name = summaryItem.project_name;
+    //     const tmplist = {
+    //       amount: [summaryItem.amount],
+    //       amount_sum: sum,
+    //       item: summaryItem.item,
+    //       division: summaryItem.division,
+    //     };
+    //     tmp2.push(tmplist);
+    //   }
+    //   data.tmp = tmp2;
+    //   tmpdata.push(data);
+    // }
   }
 }
 
-export interface PeriodicElement {
-  科目: string;
-  整年預計使用: number;
-  目前應發生: number;
-  目前已發生: number;
-  年度使用率: string;
-  累積使用率: string;
-  狀態: string;
-  description: string;
+export interface GetInitDataResponseModel {
+  data:GetInitResponseModel
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    科目: '資訊',
-    整年預計使用: 31100000,
-    目前應發生: 15350000,
-    目前已發生: 2247000,
-    年度使用率: '7.23%',
-    累積使用率: '14.64%',
-    狀態: '注意',
-    description: 'test',
-  },
-  {
-    科目: '其他費用',
-    整年預計使用: 67080000,
-    目前應發生: 43276664,
-    目前已發生: 17055860,
-    年度使用率: '25.43%',
-    累積使用率: '39.41%',
-    狀態: '正常',
-    description: `test`,
-  },
-];
-export interface PeriodicElement1 extends PeriodicElement{
-  項目: string;
+
+export interface PeriodicElement {
+  subject_id: number;
+  project_id: number;
+  金額: number;
+  說明: string;
+  科別: string;
 }
-const ELEMENT_DATA1: PeriodicElement1[] = [
-  {
-    科目: '資訊',
-    項目: '專業分析報告及產業資料庫',
-    整年預計使用: 31100000,
-    目前應發生: 15350000,
-    目前已發生: 2247000,
-    年度使用率: '7.23%',
-    累積使用率: '14.64%',
-    狀態: '注意',
-    description: 'test',
-  },
-  {
-    科目: '其他費用',
-    項目: '委外開發人力',
-    整年預計使用: 67080000,
-    目前應發生: 43276664,
-    目前已發生: 17055860,
-    年度使用率: '25.43%',
-    累積使用率: '39.41%',
-    狀態: '正常',
-    description: `test`,
-  },
-];
+
+let testnum = 0;
+
+export interface MonthAmmountData {
+  ammount: number[];
+}
+const ELEMENT_DATA: GetInitResponseModel = {
+  subjects: [
+    {
+      subject_name: '訓練費',
+      summary: [
+        {
+          project_name: '業務相關訓練課程',
+          item: 'EA 教育訓練(TOGAF台灣分會)_5人_6,11月',
+          division: 'EA',
+          population: 5,
+          amount: [0, 0, 0, 0, 0, 50000, 0, 0, 0, 0, 0, 50000],
+        },
+        {
+          project_name: '業務相關訓練課程',
+          item: '雲育鏈課程(雲端架構師考證班)_10人_6月',
+          division: 'EA',
+          population: 10,
+          amount: [0, 0, 0, 0, 0, 400000, 0, 0, 0, 0, 0, 0],
+        },
+      ],
+    },
+    {
+      subject_name: '資訊',
+      summary: [
+        {
+          project_name:
+            "專業分析報告及產業資料庫 (Gartner, CBInsight, similar web, LeetCode, O'Reilly)",
+          item: 'Gartner for Technical Professionals 第一年費用(共二年)_1月',
+          division: 'EA',
+          population: 0,
+          amount: [3000000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+          project_name:
+            "專業分析報告及產業資料庫 (Gartner, CBInsight, similar web, LeetCode, O'Reilly)",
+          item: 'xxxxx',
+          division: 'EA',
+          population: 0,
+          amount: [0, 0, 0, 0, 0, 75000, 0, 0, 0, 0, 0, 75000],
+        },
+      ],
+    },
+  ],
+};
+export interface GetInitDataResponseModel {
+  data: GetInitResponseModel;
+}
+export interface GetInitResponseModel {
+  subjects: GetInitSubjectModel[];
+}
+
+export interface GetInitSubjectModel {
+  subject_name: string;
+  summary: GetInitSummaryModel[];
+}
+export interface GetInitSummaryModel {
+  project_name: string;
+  item: string;
+  division: string;
+  population: number;
+  amount: number[];
+}
+
+const expansionPanelData: expansionPanelModel[] = [];
+
+export interface expansionPanelModel {
+  subject_name: string;
+  project_name: string;
+  amount: number[][];
+  table_up_data: tableUpModel[];
+}
+
+export interface tableUpModel {
+  ammount_sum: number;
+  item: string;
+  division: string;
+}
+
+const tmpdata: tmpUpModel[] = [];
+
+export interface tmpUpModel {
+  subject_name: string;
+  project_name?: string;
+  tmp: tmpMidModel[];
+}
+
+export interface tmpMidModel {
+  amount: number[][];
+  amount_sum: number;
+  item: string;
+  division: string;
+}

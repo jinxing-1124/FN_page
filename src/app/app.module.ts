@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { NumberAddCommasPipe } from './number_add_commas';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpService } from './second_api';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatButtonModule,
     MatTableModule,
     MatExpansionModule,
-  ],
+    HttpClientModule,
+    ],
   exports: [
     MatSidenavModule,
     MatToolbarModule,
